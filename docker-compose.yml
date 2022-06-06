@@ -1,0 +1,38 @@
+networks:
+  kewt_network:
+    driver: bridge
+
+services:
+  listener:
+    container_name: listener
+    build:
+      context: ./listener
+      dockerfile: Dockerfile
+    volumes:
+      - ./listener/:/listener/
+    command: uvicorn app.api.simple_listener:app --reload --workers 1 --host 0.0.0.0 --port 8000 
+    env_file:
+      - ./.env
+    networks:
+      - kewt_network
+
+  sender:
+    container_name: sender
+    build:
+      context: ./sender
+      dockerfile: Dockerfile
+    command: python simple_sender.py
+    networks:
+      - kewt_network
+
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - "5432:5432"
+    volumes: 
+      - ./db/db_data:/var/lib/postgresql/data
+    networks:
+      - kewt_network
