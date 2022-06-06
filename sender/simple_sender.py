@@ -17,5 +17,5 @@ def post_random_numbers(url,n):
 
 if __name__ == "__main__":
     url = "http://listener:8000/post_data_to_db"
-    sleep(5)
+    sleep(30)
     post_random_numbers(url,1000)
