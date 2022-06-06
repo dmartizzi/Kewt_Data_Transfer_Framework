@@ -13,7 +13,7 @@ def post_random_numbers(url,n):
         b = random.random()
         msg = json.dumps({"body" : {"a": a, "b": b}})
         session.post(url, data=msg)
-        sleep(5)
+        sleep(1)
 
 if __name__ == "__main__":
     url = "http://listener:8000/post_data_to_db"

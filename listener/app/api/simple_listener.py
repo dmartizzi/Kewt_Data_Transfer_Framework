@@ -1,7 +1,8 @@
 from fastapi import FastAPI, status
 from starlette.responses import Response
-from db_utils import *
-from models import *
+
+from .db_utils import *
+from .models import *
 
 app = FastAPI(title="Listener", version="1.0.0")
 
